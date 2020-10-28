@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>VIN Information</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+</head>
+
+<body>
+  <div class="container">
+    <h1>VIN Search</h1>
+
+    <!-- This form will be where users input VIN number -->
+    <form id="vin-form">
+      <label for="vin-input">VIN Number: </label>
+      <input type="text" id="vin-input"><br>
+
+      <!-- This button will trigger our AJAX call -->
+      <input id="find-vin" type="submit" value="VIN Search">
+    </form>
+
+    <!-- We'll be dumping our JSON contents in here -->
+    <div id="vin-view"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      // This .on("click") function will trigger the AJAX Call
+      $("#find-vin").on("click", function(event) {
+
+        // event.preventDefault() can be used to prevent an event's default behavior.
+        // Here, it prevents the submit button from trying to submit a form when clicked
+        event.preventDefault();
+
+        // Here we grab the text from the input box
+        var vin = $("#vin-input").val();
+
+        // Here we construct our URL
+        var queryURL = "https://www.decodethis.com/webservices/decodes/"+ vin + "/1a5endSUxzHTwKN4H9Wj/1.json";
+
+
+        // Write code between the dashes below to hit the queryURL with $ajax, then take the response data
+        // and display it in the div with an id of vin-view
+
+        // ------YOUR CODE GOES IN THESE DASHES. DO NOT MANUALLY EDIT THE HTML ABOVE.
+
+        $.ajax({
+          url: queryURL,
+          method: "GET",
+          contentType: "application/json; charset=utf-8",
+          async: false,
+          cache: false
+        }).then(function(response) {
+          $("#vin-view").text(JSON.stringify(response));
+          console.log(response);
+        });
+
+        // -----------------------------------------------------------------------
+
+      });
+    </script>
+  </div>
+</body>
+
+</html>
